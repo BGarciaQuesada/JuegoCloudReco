@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.2.7f2
+CRC: 1732155868
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e49ec0f1ef2cbc4ec8204913bc442872
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3d8f4d6cfa4de0b3707fadcb3035f4fa
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: f97deff0f840d032d6979ed3aba6fa74
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 845c415f3181b4840ab566c40e714752, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/PrefabsPersonales/Fragment.prefab
+Dependencies: []

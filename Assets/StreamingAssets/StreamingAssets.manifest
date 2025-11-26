@@ -1,0 +1,12 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.2.7f2
+CRC: 3067038590
+HashAppended: 0
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: story1fragment
+      Dependencies: {}
+    Info_1:
+      Name: ardebugmenu
+      Dependencies: {}
