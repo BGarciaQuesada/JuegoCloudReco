@@ -6,6 +6,8 @@ using UnityEngine.UI;
 // Heredo IPointerClickHandler también para que detecte hacer clic en cualquier lugar de la pantalla (abrir cofre)
 public class VictoryUI : MonoBehaviour, IPointerClickHandler
 {
+    // Esta clase maneja todo lo relacionado al panel final (abrir el cofre y regreso al menú principal)
+
     [Header("Chest")]
     [SerializeField] private Image chestImage;
     [SerializeField] private Sprite closedChestSprite;

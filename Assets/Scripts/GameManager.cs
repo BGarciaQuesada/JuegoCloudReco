@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
 
     private int currentHintIndex = 0;
 
+    public int GetCurrentHintIndex => currentHintIndex;
+
+
     // Singleton
     void Awake()
     {

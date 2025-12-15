@@ -9,8 +9,8 @@ using Vuforia;
 
 public class MetaDatos
 {
-    public string name;
-    public string nFragment;
+    public string nombre;
+    public string nFragmento;
     public string url;
 
     public static MetaDatos CreateFromJSON(string jsonString)
@@ -79,8 +79,24 @@ public class SimpleCloudRecoEventHandler1 : MonoBehaviour
     public void OnNewSearchResult(CloudRecoBehaviour.CloudRecoSearchResult cloudRecoSearchResult )
     {
         // Store the target metadata
-        mTargetMetadata = cloudRecoSearchResult.TargetName;
         metaDatosVuforia = MetaDatos.CreateFromJSON(cloudRecoSearchResult.MetaData);
+
+        // nFragmento del metadata a int
+        int fragmentNumber;
+        if (!int.TryParse(metaDatosVuforia.nFragmento, out fragmentNumber))
+        {
+            Debug.LogWarning("nFragmento no válido: " + metaDatosVuforia.nFragmento);
+            return;
+        }
+
+        // Solo acepta el target si coincide con el fragmento actual
+        if (fragmentNumber != GameManager.Instance.GetCurrentHintIndex + 1) // +1 porque index empieza en 0
+        {
+            Debug.Log("Target ignorado: no corresponde al fragmento actual");
+            return;
+        }
+
+        // Si hemos llegado hasta aquí, es correcto -> instanciar
         StartCoroutine(GetAssetBundle(metaDatosVuforia.url));
 
         if (ImageTargetTemplate)
