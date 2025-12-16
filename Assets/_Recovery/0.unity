@@ -596,7 +596,6 @@ GameObject:
   - component: {fileID: 266463839}
   - component: {fileID: 266463838}
   - component: {fileID: 266463842}
-  - component: {fileID: 266463843}
   m_Layer: 0
   m_Name: ImageTarget
   m_TagString: Untagged
@@ -674,7 +673,7 @@ MonoBehaviour:
   mMotionHint: 1
   mTrackingOptimization: 0
   mTrackingOptimizationNeedsUpgrade: 0
-  mPreview: {fileID: 266463843}
+  mPreview: {fileID: 0}
 --- !u!4 &266463840
 Transform:
   m_ObjectHideFlags: 0
@@ -702,25 +701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a95991efcbb5fa41807c8dc4a04d938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FragmentTarget
---- !u!114 &266463843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266463836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1778676317, guid: 8a9a760f95896c34689febc965510927, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
-  mObserverBehaviour: {fileID: 266463839}
-  mHiddenRoot: {fileID: 0}
-  mTargetName: 
-  mDatasetName: 
-  mCastedBehaviour: {fileID: 266463839}
-  mMeshFilter: {fileID: 0}
-  mMeshRenderer: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

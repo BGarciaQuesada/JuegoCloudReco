@@ -1,7 +1,6 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using Vuforia;
@@ -20,11 +19,11 @@ public class MetaDatos
 
 }
 
-public class SimpleCloudRecoEventHandler1 : MonoBehaviour
+public class SimpleCloudRecoEventHandler : MonoBehaviour
 {
     CloudRecoBehaviour mCloudRecoBehaviour;
-    bool mIsScanning = false;
-    string mTargetMetadata = "";
+    private bool mIsScanning = false;
+    private string mTargetMetadata = "";
     MetaDatos metaDatosVuforia;
 
     public ImageTargetBehaviour ImageTargetTemplate;
@@ -71,7 +70,7 @@ public class SimpleCloudRecoEventHandler1 : MonoBehaviour
 
         if (scanning)
         {
-            // Clear all known targets
+            mCloudRecoBehaviour.ClearObservers();
         }
     }
 
@@ -96,37 +95,22 @@ public class SimpleCloudRecoEventHandler1 : MonoBehaviour
             return;
         }
 
-        // Si hemos llegado hasta aquí, es correcto -> instanciar
-        StartCoroutine(GetAssetBundle(metaDatosVuforia.url));
-
         if (ImageTargetTemplate)
         {
             /* Enable the new result with the same ImageTargetBehaviour: */
-            mCloudRecoBehaviour.EnableObservers(cloudRecoSearchResult, ImageTargetTemplate.gameObject);
+            ObserverBehaviour observer = mCloudRecoBehaviour.EnableObservers(cloudRecoSearchResult, ImageTargetTemplate.gameObject);
+
+            // Si hemos llegado hasta aquí, es correcto -> instanciar
+            StartCoroutine(GetAssetBundle(metaDatosVuforia.url, observer.transform));
         }
 
         // Stop the scanning by disabling the behaviour
         mCloudRecoBehaviour.enabled = false;
     }
-    void OnGUI() {
-        // Display current 'scanning' status
-        GUI.Box (new Rect(100,100,200,50), mIsScanning ? "Scanning" : "Not scanning");
-        // Display metadata of latest detected cloud-target
-        GUI.Box (new Rect(100,200,200,50), "Metadata: " + metaDatosVuforia.url);
-        // If not scanning, show button
-        // so that user can restart cloud scanning
-        if (!mIsScanning) {
-            if (GUI.Button(new Rect(100,300,200,50), "Restart Scanning")) {
-                // Reset Behaviour
-                mCloudRecoBehaviour.enabled = true;
-                mTargetMetadata="";
-            }
-        }
-    }
 
-    IEnumerator GetAssetBundle(string url)
+    IEnumerator GetAssetBundle(string url, Transform parent)
     {
-        UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(metaDatosVuforia.url);
+        UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(url);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -136,10 +120,13 @@ public class SimpleCloudRecoEventHandler1 : MonoBehaviour
         else
         {
             AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
+
             string[] allAssetNames = bundle.GetAllAssetNames();
             string gameObjectName = Path.GetFileNameWithoutExtension(allAssetNames[0]).ToString();
+            
             GameObject objectFound = bundle.LoadAsset(gameObjectName) as GameObject;
-            Instantiate(objectFound, ImageTargetTemplate.transform);
+
+             Instantiate(objectFound, parent);
 
         }
     }

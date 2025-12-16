@@ -1,11 +1,14 @@
 using TMPro;
 using UnityEngine;
+using Vuforia;
 
 public class GameManager : MonoBehaviour
 {
     // Esta clase se dedica a almacenar los datos del juego y manejar los métodos que cambian la "fase"
 
     public static GameManager Instance { get; private set; }
+    CloudRecoBehaviour cloudReco;
+
 
     [Header("Fragments")]
     private int totalFragments = 5;
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        cloudReco = FindFirstObjectByType<CloudRecoBehaviour>();
         UpdateCounter();
         hintText.text = hints[0]; // primera pista inmediata
     }
@@ -54,6 +58,10 @@ public class GameManager : MonoBehaviour
         {
             currentHintIndex++;
             hintText.text = hints[currentHintIndex];
+
+            // Reactivar CloudReco
+            cloudReco.enabled = false;
+            cloudReco.enabled = true;
         }
     }
 
@@ -64,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     void ShowVictory()
     {
+        // Método por si tengo que añadir algo más
         victoryPanel.SetActive(true);
     }
 
